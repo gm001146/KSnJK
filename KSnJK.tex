@@ -1,0 +1,44 @@
+%!TEX encoding = UTF-8 Unicode
+
+%%%%% DOCUMENTCLASS %%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt, twoside, open=any, listof=totoc]{scrbook}
+
+\makeatletter
+\input{./KSnJK_a0_preamble/KSnJK_1_packages}
+\let\l@ENGLISH\l@english
+\addbibresource{./KSnJK_a1_includefiles/KSnJK_3_reference.bib}
+\input{./KSnJK_a0_preamble/KSnJK_2_config_01_basic}
+\input{./KSnJK_a0_preamble/KSnJK_3_difs_01_newcommand}
+\input{./KSnJK_a0_preamble/KSnJK_3_difs_04_links}
+\input{./KSnJK_a0_preamble/KSnJK_4_styles_01_newtblrs}
+\input{./KSnJK_a0_preamble/KSnJK_4_styles_02_newtcolorboxes}
+\input{./KSnJK_a0_preamble/KSnJK_4_styles_03_pagestyles}
+\input{./KSnJK_a0_preamble/KSnJK_4_styles_04_lists}
+\input{./KSnJK_a0_preamble/KSnJK_4_styles_05_components}
+\input{./KSnJK_a0_preamble/KSnJK_5_intro_01_title}
+\makeindex
+\makeatother
+
+\setlength\baselineskip{16pt}
+\setlength\normalbaselineskip{\baselineskip}
+\let\cleardoublepage\tmpcleardoublepage
+\let\clearpage\tmpclearpage
+
+\watermarkCopy
+%\usepackage{refcheck}
+%\RequirePackage{plautopatch}
+
+\WarningFilter{biblatex}{Split bibliography}
+
+\begin{document}
+%% TITLE and FRONTMATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{./KSnJK_a2_front_and_backmatter/KSnJK_frontmatter}
+
+%% MAINMATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subfile{./KSnJK_p1_basics/KSnJK_p1_c1_basics}
+\subfile{./KSnJK_p2_individual_levels/KSnJK_p2_c1_individual_levels}
+
+%% BACKMATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subfile{./KSnJK_a2_front_and_backmatter/KSnJK_backmatter}
+
+\end{document}

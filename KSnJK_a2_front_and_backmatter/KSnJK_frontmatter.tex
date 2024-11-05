@@ -1,0 +1,36 @@
+%!TEX root = ../KSnJK.tex
+
+
+%% TITLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addtocounter{page}{1}
+\let\cleardoublepage\relax
+\maketitle
+\thispagestyle{plainheadfront}%
+\let\cleardoublepage\tmpcleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FRONTMATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frontmatter
+%% TABLE OF CONTENTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addchaptertocentry{}{\contentsname}
+\tableofcontents % insert toc
+
+\clearrightpage
+\phantomsection
+%% LIST OF TABLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\listoftables  % insert lot
+
+
+\edef\temppartnum{\protect{\the\numexpr\value{part}+1\relax}}
+\addtocontents{toc}{\protect\vspace*{6mm}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MAINMATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+
+\addtocontents{lof}{\begin{lofBox}}%
+\addtocontents{lot}{\begin{lotBox}}%
+
+\clearrightpage

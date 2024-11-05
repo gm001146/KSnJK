@@ -1,0 +1,117 @@
+%!TEX root = ../KSnJK.tex
+
+
+%%%%% COLOR %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{ai}     {rgb}{0.2039, 0.3765, 0.4314}
+\definecolor{hosoku} {cmyk}{0, 0, 0, .1}
+\definecolor{kon}    {rgb}{0.0000, 0.2000, 0.4000}
+\definecolor{konpeki}{rgb}{0.0902, 0.5098, 0.7333}
+\definecolor{moegi}  {rgb}{0.3020, 0.5961, 0.1882}
+\definecolor{sssec}  {rgb}{0.7333, 0.5, 0.7333}
+\definecolor{sora}   {rgb}{0.1451, 0.7216, 0.8039}
+\definecolor{sumire} {rgb}{0.3882, 0.2157, 0.5922}
+\newcommand{\getlinkcolor}{\@linkcolor}
+%%%%% DATE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\customtoday}{\the\year/\two@digits{\the\month}/\two@digits{\the\day}}
+\newcommand{\customdate}{\customtoday\ \currenttime\ (\jadayofweek{\the\year}{\the\month}{\the\day})}
+%\newcommand{\customtodayap}{\ifnum\currenthour<12 \customtoday\,a.m.\else\customtoday\,p.m.\fi}
+%%%%% FOR INDEX %%%%%%%%%%%%%%%%%%
+\NewDocumentCommand{\expandafterindex}{m}{\index{#1}}
+\pdfstringdefDisableCommands{\def\expandafterindex#1{}}
+%%%%% OTHER DEFINITION %%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\ttNum{\ifmmode{\text{\texttt\#}}\else\texttt\#\fi}
+\pdfstringdefDisableCommands{\def\leavevmode@ifvmode{}}
+\pdfstringdefDisableCommands{\def\kern{}}
+\newcommand\cf{{\itshape cf.\,}}
+\newcommand{\TBW}{\texorpdfstring{\small{\color{red}\,*}}{}}
+%%%%% OTHER TIKZ DEFINITION %%%%%%%%%%%%%%%%%%
+%%%%% TIKZSET %%%%%%%%%%%%%%%%%%%
+\tikzset{
+  %%%%% TERMINAL STYLE %%%%%
+  terminal/.style={%
+    rectangle,%
+    minimum size=10pt,%
+    rounded corners=1.5mm,%
+    thin,%
+    draw=black!75,%
+    top color=white,%
+    font=\ttfamily,%
+    inner sep=3pt,%
+    inner xsep=3pt,%
+    text height=1ex,%
+    text depth=0pt,%
+  },
+}
+\tikzfading[name=fade ball, inner color=transparent!60, outer color=transparent!30]
+\newcommand\sarrow[1][blue]{%
+  \tikz\draw[decorate,
+             decoration={shape backgrounds, shape=dart, shape size=2.0mm},
+             color=#1,
+             fill=#1,
+             path fading=fade ball] (0, 0);
+}
+\newcommand\terminal[2]{\tikz[baseline=(a.base)] \node (a) [terminal, bottom color=#2] {\small #1};}
+\newcommand\termblue[1]{\terminal{\color{blue}\fontsize{8pt}{0pt}\textbf{#1}}{gray!25}\hskip6pt}
+%%%%% PAGEREF %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\pageautoref}[1]{%
+  \ifthenelse{\equal{\pageref{#1}}{\thepage}}%
+    {\autoref{#1}}%
+    {\autoref{#1}~[p.\pageref{#1}]}%
+}
+\newcommand{\pageeqref}[1]{%
+  \ifthenelse{\equal{\pageref{#1}}{\thepage}}%
+    {\eqref{#1}}%
+    {\eqref{#1}~[p.\pageref{#1}]}%
+}
+%%%%% tPart %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcounter{tocwatermark}
+\setcounter{tocwatermark}{1}
+\def\tmppartnum{\Roman{tocwatermark}}%
+\newcommand{\tPart}[2][]{%
+  \addtocounter{tocwatermark}{1}
+  \def\tmppartnum{\Roman{tocwatermark}}%
+  \begingroup
+  \clearrightpage~
+  \thispagestyle{emptydate}
+  \part{\label{part:\thepart}\vphantom{\ref{part:\thepart}}#2}
+  \addtocontents{lop}{\protect\vspace*{-2.5mm}}%
+  \addcontentsline{lop}{part}{\protect\numberline{\thepart}#2}%
+  \ifx#1\relax\else%
+    \foreach \x in {#1}{\addcontentsline{\x}{part}{\protect\numberline{\thepart}#2}}%
+  \fi
+  \clearpage
+  \@openrightfalse
+  \@mainmattertrue\pagestyle{main}
+  \endgroup
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% AUTO LABELING %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% FOR CHAPTER OR APPENDIX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\modHeadchapter}[2][]{%
+  \cleardoublepage
+  \let\newpage\relax
+  \ifx\@chapapp\appendixname%
+    \chapter{\label{app:\thepart.\thechapter}\vphantom{\ref{app:\thepart.\thechapter}}#2}%
+  \else%
+    \chapter{\label{chap:\thepart.\thechapter}\vphantom{\ref{chap:\thepart.\thechapter}}#2}%
+  \fi%
+  \ifx#1\relax\else%
+    \foreach \x in {#1}{\addcontentsline{\x}{chapter}{\protect\numberline{\thechapter}#2}}%
+  \fi%
+  \thispagestyle{main}%
+  \indentspace%
+  \let\newpage\tmpnewpage%
+}
+%%%%% FOR SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\modHeadsection}[2][]{%
+  \ifx\relax#1\relax
+    \section{\label{sec:\thepart.\thesection}\vphantom{\protect\ref{sec:\thepart.\thesection}}#2}%
+  \else%
+    \section[#1]{\label{sec:\thepart.\thesection}\vphantom{\protect\ref{sec:\thepart.\thesection}}#2}%
+  \fi%
+}
+%%%%% MODCAPTOINOF %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\abovecaptionskip}{0pt}

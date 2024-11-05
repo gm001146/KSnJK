@@ -1,0 +1,46 @@
+%!TEX root = ../KSnJK.tex
+
+
+\addtocontents{lof}{\end{lofBox}}%
+\addtocontents{lot}{\end{lotBox}}%
+
+%\nocite{online:a}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% BACKMATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backmatter
+\addtocontents{toc}{\protect\vspace*{10pt}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% LIST OF FIGURES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\phantomsection
+\listoffigures\thispagestyle{plainheadback}
+
+\clearrightpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% BIBLIOGRAPHY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begingroup
+\let\cleardoublepage\relax
+{\footnotesize%
+\printbibheading[title={\bibname}, heading=bibnumbered]
+\printbibheading[title={\citedworksname}, heading=subbibintoc]
+\printbibliography[title={\OnlineSourcename}, heading=subsubbibintoc, keyword={citedwork}, type=online]
+}%
+\let\cleardoublepage\tmpcleardoublepage
+\endgroup
+
+\clearrightpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% INDICES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begingroup
+\let\cleardoublepage\relax
+\addchaptertocentry{}{\indexname}
+{\footnotesize\printindex}
+\let\cleardoublepage\tmpcleardoublepage
+\endgroup
+
+
+\thispagestyle{empty}~\vfill\hfill{\tiny Printed in Japan}

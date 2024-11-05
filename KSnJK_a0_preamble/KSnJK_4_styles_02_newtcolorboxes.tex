@@ -1,0 +1,198 @@
+%!TEX root = ../KSnJK.tex
+
+
+\newcounter{GlobalFootnote}% difine a counter Global Footnote
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% COMMONBOX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tcbset{%
+  %%%%% TCBCOMMON STYLE %%%%%
+  tcbcommon/.style={%
+    before upper={%
+      \setcounter{GlobalFootnote}{\value{footnote}}% GlobalFootnoteValue=footnoteValue
+      \let\oldfootnote=\footnote% \oldfootnote=\footnote
+      \def\footnote{\stepcounter{GlobalFootnote}\oldfootnote[\arabic{GlobalFootnote}]}% using counter GlobalFootnote
+      \renewcommand\thempfootnote{\arabic{mpfootnote}}% arabic footnote
+    },
+    after upper={%
+      \setcounter{footnote}{\value{GlobalFootnote}}% footnoteValue=GlobalFootnoteValue
+      \let\footnote=\oldfootnote% \footnote=\oldfootnote
+    },
+  },
+  %%%%% FIGURECOMMONBOX STYLE %%%%%
+  Figurecommonbox/.style={%
+    notitle,%
+    enhanced,
+    center upper,%
+    center lower,%
+    arc=5pt,%
+    outer arc=2pt,%
+    boxrule=1pt,%
+    boxsep=3mm,%
+    valign=center,%
+    halign=center,%
+    left=0pt,%
+    right=0pt,%
+    colback=green!3!white,%
+    colframe=black!25!white,%
+%    before={\centering},
+  },
+  %%%%% LIST COMMON STYLE %%%%%
+  listcommonstyle/.style={%
+    parskip/.style={
+      before={\par\nopagebreak\parindent=0pt},
+      after={\parfillskip=0pt\par},
+    },
+    breakable,%
+    enhanced jigsaw,%
+%    before=\par\bigskip\noindent,%
+    enlargepage flexible=\baselineskip,%
+    width=\textwidth,
+    pad at break*=3mm,%
+    before skip=0mm,%
+    top=4mm,%
+    middle=4.5mm,
+    height fixed for=first and middle,%
+    drop fuzzy shadow,
+  },
+}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% TABBOX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtcolorbox{Tabbox}[1][]{Tabularbox, #1}
+\tcbset{%
+  %%%%% TABULARBOX STYLE %%%%%
+  Tabularbox/.style={%
+    fonttitle=\gtfamily\bfseries,%
+    breakable,%
+    enhanced jigsaw,%
+    left=.5ex,%
+    right=.5ex,%
+    bicolor,%
+    colbacklower=black!10!white,%
+    after=\smallskip\noindent,
+    tcbcommon,
+  },%
+}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% FIGLANDSCAPEBOX %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtcolorbox{Figlandscape}[1][]{Figurelandscapebox, #1}
+\tcbset{%
+  %%%%% FIGUREBOX STYLE %%%%%
+  Figurelandscapebox/.style={%
+    Figurecommonbox,
+    height=\textheight-6.8pt,
+  }%
+}%
+
+%%%%% FIGBOX %%%%%
+\newtcolorbox{FigShortbox}[1][]{FigureShortbox, #1}
+\tcbset{%
+  %%%%% FIGUREBOX STYLE %%%%%
+  FigureShortbox/.style={%
+    Figurecommonbox,
+    width=\textwidth,
+  }%
+}
+\newtcolorbox{Figbox}[1][]{Figurebox, #1}
+\tcbset{%
+  %%%%% FIGUREBOX STYLE %%%%%
+  Figurebox/.style={%
+    FigureShortbox,
+    height=\textheight-6.8pt,
+  }%
+}
+
+%%%%% TOCBOX %%%%%
+\newtcolorbox{tocBox}[1]{tocstyle, watermark text={\sffamily\bfseries{#1}}}
+\tcbset{%
+  %%%%% TOCSTYLE STYLE %%%%%
+  tocstyle/.style={%
+    listcommonstyle,
+    colback=green!0.5!white,%
+    colframe=green!40!black!75!,%
+    watermark color=green!60!yellow!13!white,%
+  },
+}%
+
+%%%%% LOFBOX %%%%%
+\newtcolorbox{lofBox}{lofstyle}
+\tcbset{%
+  %%%%% LOCSTYLE STYLE %%%%%
+  lofstyle/.style={%
+    listcommonstyle,
+    colback=cyan!1!white,%
+    colframe=cyan!100!black!100!,%
+  },%
+}%
+
+%%%%% LOTBOX %%%%%
+\newtcolorbox{lotBox}{lotstyle}
+\tcbset{%
+  %%%%% LOTSTYLE STYLE %%%%%
+  lotstyle/.style={lofstyle,},
+}%
+
+%%%%% HOSOKU %%%%%
+\newcommand{\hosokuname}{補}
+\newtcolorbox[auto counter, number within=chapter]{hosoku}[1][]{hosokubox, #1}
+\newcommand{\tcb@cnt@hosokuautorefname}{補足}
+\tcbset{%
+  %%%%% HOSOKUBOX STYLE %%%%%
+  hosokubox/.style={%
+    title={\termblue{\hosokuname\,\thetcbcounter}~},%
+    detach title,%
+    breakable,%
+    enhanced jigsaw,%
+    size=fbox,%
+    arc=0pt,%
+    middle=1mm,%
+    colback=hosoku,%
+    colframe=hosoku,%
+    drop lifted shadow={blue!100!white!50!},%
+    skin first is subskin of={enhanced jigsaw}{no shadow},%
+    skin middle is subskin of={enhanced jigsaw}{no shadow},%
+    skin last is subskin of={enhanced jigsaw}{drop lifted shadow={blue!100!white!50!}},%
+    segmentation style={draw=black!50!white},%
+    after=\smallskip\noindent{\color{white}},%
+    before upper={%
+      \tcbtitle%
+      \setcounter{GlobalFootnote}{\value{footnote}}% GlobalFootnoteValue=footnoteValue
+      \let\oldfootnote=\footnote% \oldfootnote=\footnote
+      \def\footnote{\stepcounter{GlobalFootnote}\oldfootnote[\arabic{GlobalFootnote}]}% using counter GlobalFootnote
+      \renewcommand\thempfootnote{\arabic{mpfootnote}}% arabic footnote
+    },
+    after upper={%
+      \setcounter{footnote}{\value{GlobalFootnote}}% footnoteValue=GlobalFootnoteValue
+      \let\footnote=\oldfootnote% \footnote=\oldfootnote
+    },
+  }
+}%
+
+%%%%% MARKER %%%%%
+\newtcolorbox{marker}[1][]{
+  enhanced,
+  before skip balanced=2mm,
+  after skip balanced=3mm,
+  boxrule=0.4pt,
+  left=5mm,
+  right=2mm,
+  top=1mm,
+  bottom=1mm,
+  colback=yellow!50,
+  colframe=yellow!50!black,
+  sharp corners,
+  rounded corners=southeast,
+  arc is angular,
+  arc=3mm,
+  overlay={%
+    \path[fill=tcbcolback!80!black] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+    \path[draw=tcbcolframe, shorten <=-0.05mm,shorten >=-0.05mm] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+    \path[fill=yellow!50!black,draw=none] (interior.south west) rectangle node[white]{\Huge\bfseries !} ([xshift=4mm]interior.north west);
+    },
+  drop fuzzy shadow,
+  #1,
+}
