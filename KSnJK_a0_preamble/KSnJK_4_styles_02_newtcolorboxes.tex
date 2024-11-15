@@ -77,6 +77,28 @@
 }%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% COLUMN %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Columnname}{Column}
+\newtcolorbox[auto counter, number within=chapter]{\Columnname}[2][]{%
+  Columnbox,
+  title={#2},
+  #1,
+  before upper={%
+    \addcontentsline{loColumn}{loColumn}{\protect\numberline{\thetcbcounter}#2}%
+  },
+}
+%\newcommand{\tcb@cnt@Columnautorefname}{Column}
+\tcbset{%
+  %%%%% COLUMNBOX STYLE %%%%%
+  Columnbox/.style={%
+    Tabularbox,
+    colback=black!02!white!,%
+    after title={\hfill\termblue{\Columnname.\thetcbcounter}},%
+  }%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% FIGLANDSCAPEBOX %%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newtcolorbox{Figlandscape}[1][]{Figurelandscapebox, #1}
